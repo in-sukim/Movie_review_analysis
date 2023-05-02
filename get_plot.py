@@ -104,7 +104,7 @@ class reivew_analysis():
             subplot_titles=("평점 별 빈도수 막대그래프", "긍/부정별 빈도수 파이차트") 
         )
 
-        bar_df = df.data.value_counts('rating').to_frame('count').reindex([str(i) for i in range(11)]).fillna(0)
+        bar_df = self.data.value_counts('rating').to_frame('count').reindex([str(i) for i in range(11)]).fillna(0)
 
         fig.add_trace(
             go.Bar(
@@ -120,7 +120,7 @@ class reivew_analysis():
             col=1
         )
 
-        pie_df = df.data.value_counts('label').to_frame('count')
+        pie_df = self.data.value_counts('label').to_frame('count')
         go.Pie(labels=pie_df.index.tolist(),
                values=pie_df['count']
               )
