@@ -124,7 +124,7 @@ class NSMCDataModule(pl.LightningDataModule):
     
     
 class NSMCClassifier(pl.LightningModule):
-    def __init__(self, config =  json.load(open('sentiment_model_config.json')), model_name = 'klue/bert-base'):
+    def __init__(self, config =  json.load(open('./modules/sentiment_model_config.json')), model_name = 'klue/bert-base'):
         super(NSMCClassifier, self).__init__()
         self.config = config
         self.model_name = model_name

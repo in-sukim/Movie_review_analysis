@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[76]:
-
-
 import warnings
 warnings.filterwarnings('ignore')
 import json
@@ -18,8 +12,8 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 # custom_module
-import sentiment_model
-import review_prepare
+import modules.sentiment_model as sentiment_model
+import modules.review_prepare as review_prepare
 
 # 혐오표현 모델 추가 예정
 
@@ -32,7 +26,7 @@ class reivew_analysis():
                  keywords, 
                  page: int = 2, 
                  model_name = 'klue/bert-base',
-                 sentiment_model_path = './nsmc_clf_ver1.pth',
+                 sentiment_model_path = './modules/nsmc_clf_ver1.pth',
                  model = sentiment_model.NSMCClassifier()
                 ):
                  

@@ -1,8 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[2]:
-
 import re 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -18,8 +13,6 @@ warnings.filterwarnings('ignore')
 
 from selenium.webdriver.common.keys import Keys
 
-#
-# In[1]:
 
 def preprocess(df):
     texts = []

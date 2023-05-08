@@ -1,14 +1,17 @@
-from dash import Dash, dcc, html, dash_table
-from dash.dependencies import Input, Output
+from dash import Dash, dcc, html, dash_table, callback, Input, Output
+# from dash.dependencies import Input, Output
 from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
 
 import json
 import pandas as pd 
-from info_prepare import get_movie_info
+from modules.info_prepare import get_movie_info
+import dash 
 
-app = Dash(__name__)
-app.layout = html.Div([
+# app = Dash(__name__)
+dash.register_page(__name__, path = '/')
+# app.layout = html.Div([
+layout = html.Div([
     html.Div([
         dcc.Input(id="input1", type="text", placeholder="", style={'marginRight':'10px'},debounce = True)
     ],style=dict(display='flex', justifyContent='center')),
@@ -23,7 +26,8 @@ app.layout = html.Div([
     ])
 ])
 
-@app.callback(
+# @app.callback(
+@callback(
     Output('movie_title', 'children'),
     Output('movie_info','children'),
     Output('story', 'children'),
@@ -37,5 +41,5 @@ def movie_title_set(input1):
         info_list, breif_story, crew_name, crew_position = get_movie_info(input1)
         # return json.dumps(crew_dict, indent = 2, ensure_ascii = False)
         return '{} 영화 정보'.format(input1), [html.Li(i) for i in info_list] ,breif_story, [html.Li(i) for i in crew_name]
-if __name__ == "__main__":
-    app.run_server(debug=True)
+# if __name__ == "__main__":
+#     app.run_server(debug=True)

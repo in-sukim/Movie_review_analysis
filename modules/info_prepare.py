@@ -43,4 +43,4 @@ def get_movie_info(keyword):
 
     return info_list, breif_story, crew_name, crew_position
 
-# type_list, info_list,breif_story, crew_name, crew_position = get_movie_info('존윅4')
+# type_list, info_list,breif_story, crew_name, crew_position = get_movie_info('존윅4') 
