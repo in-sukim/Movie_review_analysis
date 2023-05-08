@@ -24,7 +24,7 @@ from selenium.webdriver.common.keys import Keys
 def preprocess(df):
     texts = []
     for i in tqdm(df['text']):
-        text = re.sub('[^a-zA-Z가-힣\s]', '', i)
+        text = re.sub('[^0-9a-zA-Z가-힣\s]', ' ', i)
         texts.append(str(text))
     
     df['text'] = texts
@@ -49,12 +49,14 @@ def daum(keyword, num: int):
     # 검색 리스트 중 가장 위의 영화(검색 영화) 선택
     driver.find_element(By.CLASS_NAME, 'thumb_img').click()
     time.sleep(5)
+    # time.sleep(2)
     driver.find_element(By.XPATH, '//*[@id="mainContent"]/div/div[2]/div[1]/ul/li[4]/a').click()
     time.sleep(5)
+    # time.sleep(3)
 
     for i in range(num):
         driver.find_element(By.XPATH, '//*[@id="alex-area"]/div/div/div/div[3]/div[1]/button').click()
-#         time.sleep(5)
+        time.sleep(3)
 
     items = driver.find_element(By.XPATH,'//*[@id="alex-area"]/div/div/div/div[3]/ul[2]')
     li = items.find_elements(By.TAG_NAME, 'li')
@@ -71,13 +73,8 @@ def daum(keyword, num: int):
         reviews.append(step2)
     
     df = pd.DataFrame(reviews).rename(columns = {0:'rating',1:'text'})
+    df = df.loc[df['text'].str.len() > 7]
+    
     
     
     return preprocess(df)
-
-
-# In[ ]:
-
-
-
-

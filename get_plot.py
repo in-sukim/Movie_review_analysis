@@ -84,18 +84,6 @@ class reivew_analysis():
         
         return self.data
     
-#     def create_plot(self):
-#         bar_df = self.data.value_counts('rating').to_frame('count').reindex([str(i) for i in range(11)]).fillna(0)
-#         fig = go.Figure([go.Bar(
-#         x = bar_df.index.tolist(), 
-#         y = bar_df['count'], 
-#         hovertemplate = '평점: %{x}<br>갯수: %{y:$/0f}<extra></extra>')
-#                     ])
-
-#         fig.update_layout(margin=dict(l=120, r=120, t=120, b=120),
-#                  hovermode = 'closest')
-#         return fig
-    
     def create_plot(self):
         fig = make_subplots(
             rows=1, 
@@ -130,7 +118,8 @@ class reivew_analysis():
                 labels= pie_df.index.tolist(), 
                 values= pie_df['count'],
                 textinfo='label+percent',
-                hovertemplate = '갯수: %{value}<br>Percent: %{percent:$/0f}<extra></extra>'
+                hovertemplate = '갯수: %{value}<extra></extra>'
+                # hovertemplate = '갯수: %{value}<br>Percent: %{percent:.2f}<extra></extra>'
             ),
             row = 1,
             col = 2
@@ -139,7 +128,8 @@ class reivew_analysis():
         fig.update_layout(margin=dict(l=120, r=120, t=120, b=120),
                          hovermode = 'closest',
                          showlegend=False,
-                         plot_bgcolor='white')
+                         plot_bgcolor='white',
+                         clickmode = 'event+select')
         return fig
 
 
