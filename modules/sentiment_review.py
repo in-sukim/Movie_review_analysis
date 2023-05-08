@@ -14,7 +14,8 @@ from plotly.subplots import make_subplots
 # custom_module
 import modules.sentiment_model as sentiment_model
 import modules.review_prepare as review_prepare
-
+# import sentiment_model
+# import review_prepare
 # 혐오표현 모델 추가 예정
 
 
@@ -77,7 +78,7 @@ class reivew_analysis():
         self.data['label'] = self.review_list
         
         return self.data
-    
+
     def create_plot(self):
         fig = make_subplots(
             rows=1, 
