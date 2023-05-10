@@ -131,6 +131,7 @@ class reivew_analysis():
 # # 파이차트 Hover or Click 하면 해당 긍/부정 카테코리의 WordCloud 생성
 
 
+# df = reivew_analysis('존윅4', 1)
 
 
 

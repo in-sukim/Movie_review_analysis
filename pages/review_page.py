@@ -5,7 +5,7 @@ import json
 import pandas as pd 
 import dash 
 
-from modules.get_plot import reivew_analysis
+from modules.sentiment_review import reivew_analysis
 from modules.info_prepare import get_movie_info
 from modules.review_prepare import daum
 
