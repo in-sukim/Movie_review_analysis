@@ -9,6 +9,18 @@
 ## API 기능 소개
 > - 영화 기본 정보(출연진, 줄거리 등)
 > - 평점, 긍/부정별 리뷰에 대한 테이블 뷰, 워드클라우드 제공
+> 
+## Stacks 🐈
+
+### 스크래핑
+<img src="https://img.shields.io/badge/selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white">
+
+### 긍/부정 모델
+<img src="https://img.shields.io/badge/pytorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white"><img src="https://img.shields.io/badge/pytorchlightning-792EE5?style=for-the-badge&logo=pytorchlightning&logoColor=white">
+
+### 시각화 및 API
+<img src="https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=Plotly&logoColor=white">
+
 
 ## API 화면
 | 영화 기본정보  |  평점, 긍/부정별 리뷰 빈도수 시각화  |
