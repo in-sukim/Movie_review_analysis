@@ -7,7 +7,6 @@ import torch
 from transformers import BertTokenizer
 
 import matplotlib.pyplot as plt
-import seaborn as sns
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 

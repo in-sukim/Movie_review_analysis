@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 from io import BytesIO
 import base64
 import json
-from konlpy.tag import Okt
+from konlpy.tag import Mecab
 from collections import Counter
 from wordcloud import WordCloud
 
@@ -20,9 +20,10 @@ from modules.sentiment_review import reivew_analysis
 
 class one_run:
     def __init__(self):
-        global okt
+        global m
 
-        okt = Okt()
+        m = Mecab()
+        
 def plot_wordcloud(data):
     d = {a: x for a, x in data.values}
     wc = WordCloud(font_path = 'AppleGothic',
@@ -48,7 +49,6 @@ app.layout = html.Div([
         html.Br(),
         dbc.Row([
             dbc.Col([html.H3('기본정보: '),html.Ul(id = 'movie_info')], style={'margin-left': '150px'}),
-            # , style={"width": "50%"}
             dbc.Col([html.H3('출연진: '),html.Ul(id = 'crew_list')], style={'margin-left': '150px'}),
             dbc.Col([html.H3('줄거리: '), html.P(id= 'story')], style={'margin-right': '120px'})
 
@@ -59,11 +59,10 @@ app.layout = html.Div([
     html.H1(id = 'review_title',style = {'textAlign' : 'center'}),
     html.Br(),
     html.Div([dcc.Store(id="current_df")]),
-    # dcc.Graph(id = "graph1", config= {'displayModeBar': False}),
+
     html.Div([
         dbc.Row([
             dbc.Col([dcc.Graph(id = "graph1", config= {'displayModeBar': False}),], lg=6),
-            # dbc.Col([dcc.Graph(id = "graph2", config= {'displayModeBar': False}),], lg=6)
             ], justify="center", align="center")
     ]),
     html.Div([
@@ -83,22 +82,9 @@ app.layout = html.Div([
                                                          'fontSize':12, 'font-family':'NanumSquareR'})
                                                          ]),
             dbc.Col([html.Img(id="image_wc")], lg=6)
-            # dbc.Col([dcc.Graph(id = "graph2", config= {'displayModeBar': False}),], lg=6)
             ])
     ])
-    # dash_table.DataTable(id = 'review_df',
-    #                  columns = [
-    #                     #  dict(id='rating', name='rating', type='text'),
-    #                      dict(id='text', name='text', type='text'),
-    #                      ],
-    #                      editable=False,
-    #                      data = [],
-    #                      page_size=10,
-    #                      style_data={
-    #                          'whiteSpace': 'normal',
-    #                          'height': 'auto'},
-    #                          style_cell={'textAlign': 'center',
-    #                                      'fontSize':12, 'font-family':'NanumSquareR'})
+
     # html.Div([
     #     html.Div([
     #         html.Div(dcc.Link(
@@ -127,7 +113,6 @@ def movie_info(input1):
     Output('review_title', 'children'),
     Output('current_df', 'data'),
     Output("graph1", "figure"),
-    # Output("graph2", "figure"),
     Input('input1','value')
     
 )
@@ -146,17 +131,7 @@ def movie_review(input1):
     Input("graph1", "clickData"),
     Input('image_wc', 'id')
 )
-# def return_plot(data,clickData):
-#     if clickData is None:
-#         raise PreventUpdate
-#     else:
-#         df = pd.DataFrame(data)
-#         if clickData['points'][0]['label'] in [str(i) for i in range(11)]:
-#             condition = df['rating'] == clickData['points'][0]['label']
-#             df = df.loc[condition]
-#             return df.to_dict('records')
-#         else:
-#             return None
+
         
 def return_plot(data,clickData, b):
     if clickData is None:
@@ -169,7 +144,7 @@ def return_plot(data,clickData, b):
         df = df.loc[condition1 | condition2]
 
         full = []
-        for i in df['text'].map(lambda x: okt.nouns(x)).tolist():
+        for i in df['text'].map(lambda x: m.nouns(x)).tolist():
             for j in i:
                 if len(j) > 1:
                     full.append(j)
